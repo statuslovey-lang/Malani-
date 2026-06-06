@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered member profile with membership card details, dues ledger, and claims registry",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID" },
+        "displayName": { "type": "string", "description": "Member full name in Hindi/English" },
+        "membershipId": { "type": "string", "description": "Membership identifier (e.g. MSS1002)" },
+        "fatherName": { "type": "string", "description": "Father's name and village" },
+        "phone": { "type": "string", "description": "Mobile contact number" },
+        "email": { "type": "string", "description": "Email address" },
+        "isStudent": { "type": "boolean", "description": "Student status switch" },
+        "unpaidInstallments": { "type": "integer", "description": "Number of outstanding unpaid book entries" },
+        "eligibilityChecked": { "type": "boolean", "description": "Verification audit flag" },
+        "joinedAt": { "type": "string", "description": "Registry date" },
+        "avatarUrl": { "type": "string", "description": "Optional customized photo URL" },
+        "ledgerItems": {
+          "type": "array",
+          "items": { "type": "object" },
+          "description": "Serialized list of ledger transactions"
+        },
+        "claimsList": {
+          "type": "array",
+          "items": { "type": "object" },
+          "description": "Serialized list of welfare claims submitted"
+        }
+      },
+      "required": ["uid", "displayName", "membershipId", "fatherName", "phone", "email", "isStudent", "unpaidInstallments", "eligibilityChecked", "joinedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Registered community members directory"
+    }
+  }
+}
